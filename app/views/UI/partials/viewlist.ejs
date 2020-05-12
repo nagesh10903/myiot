@@ -1,0 +1,23 @@
+    <table class="table table-striped table-hover table-sm table-bordered table-responsive text-nowrap small">
+      <thead class="thead-dark">
+    <tr class="small">
+        <%  var data=result;for(var k in data[0]){  
+           if(k.toUpperCase()!=='ROWID' ){
+          %>
+            <th><%= k.toUpperCase() %> </th>
+           <%  }}; %>
+           <th> 
+           
+          </th>
+      </tr>
+      </thead>
+      <% data.forEach( row =>{   %>
+        <tr>
+       <%  for(var k in row){  
+          if(k.toUpperCase()!=='ROWID' ){  %>
+        <td><%= row[k] %> </td>
+       <%  }}; %>      
+    </tr>
+      <%  }) %>       
+    </table>
+    

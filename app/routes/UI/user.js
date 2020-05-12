@@ -2,7 +2,16 @@ const router=require("express").Router();
 const usrctl=require("../../controlers/UI/userctl")
 
 router.get("/",usrctl.getAll);
-router.get("/:id",usrctl.getById);
+router.get("/view/:id",usrctl.getById);
+router.get("/add",usrctl.getByIdAdd);
+router.get("/edit/:id",usrctl.getById); 
+router.get("/chpwd/:id",usrctl.chagePassword);
+
+
+router.post("/add",usrctl.add); 
+router.post("/edit",usrctl.update); 
+router.post("/chpwd",usrctl.updatePassword);
+router.post("/delete",usrctl.remove);
 /*
 router.get("/devices",usrctl.getAllDevices);
 router.get("/location",usrctl.getAllLocations);
@@ -13,7 +22,7 @@ router.get("/location/:id",usrctl.getUserLocation);
 
 router.delete("/:rowid",usrctl.remove);
 router.delete("/",usrctl.remove);
-router.post("/",usrctl.add);
+
 router.put("/:rowid",usrctl.update);
 router.put("/",usrctl.update);
 */

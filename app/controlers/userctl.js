@@ -33,6 +33,7 @@ class userctl extends basecontroler{
  } 
 
  add(req,res){
+     
     userService.addRow(req.body,(err,result) => {
         sendResponse(err,result,res);       
     });

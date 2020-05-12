@@ -73,7 +73,6 @@ getUserLocation(req,res){
         sendResponse(err,result,res);            
     });
 }
-
-
 }
+
 module.exports=new userctl(userService);

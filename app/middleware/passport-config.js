@@ -9,14 +9,14 @@ function initialize(passport)
           return done(null,false,{message:"No user Found with this Email !"})
       }
       try{
-         // if(bcrypt.compare(password,user.password)){
-          if(password===user.password){           
-              return done(null,user)
-          } 
+     //   console.log(password,user.password)
+           if(bcrypt.compareSync(password,user.password)===true || password===user.password ){
+             return  done(null,user)
+           }          
           else {
-              return done(null,false,{message:"password Incorrect"})  
+            return done(null,false,{message:"password Incorrect"})  
           }
-      }
+        }      
       catch(e){
           return done(e)
       }           
@@ -25,9 +25,12 @@ function initialize(passport)
 
  passport.use(new LocalStrategy({usernameField:'email'},
               authenticateUser))
- passport.serializeUser((user,done)=>done(null,user))
- passport.deserializeUser((user,done)=>{
-   return  done(null,user)
+ passport.serializeUser((user,done)=>done(null,user.rowid))
+ passport.deserializeUser((rowid,done)=>{
+   userService.getById(rowid,(err,user)=>{
+     if(err)done(null,false)
+     done(null,user)
+    })
 })
 }
 

@@ -2,6 +2,10 @@ const {checkAurth,checkNotAurth}=require('./../../middleware/passport-config')
 const ejsLayout=require("express-ejs-layouts")
 var userRoute=require("./user")
 var devdetRoute=require("./devicedet")
+var locRoute=require("./location")
+var edgeRoute=require("./edge")
+var usrdevRoute=require("./userdevices")
+var devposRoute=require("./devicepos")
 /*
 
 var groupRoute=require("./group")
@@ -32,17 +36,22 @@ module.exports=(app)=>{
       
   app.get('/logout',(req,res)=>{
      req.logOut()
+     req.session.destroy((err)=>{
+       if(err) console.log('Session Logout Error!',err)
+     })
      res.redirect('/login')
    })
 
    app.use("/users",checkAurth,userRoute)
-   app.use("/devices",devdetRoute)
+   app.use("/devices",checkAurth,devdetRoute)
+   app.use("/locations",checkAurth,locRoute)
+   app.use("/edges",checkAurth,edgeRoute)
+   app.use("/userdev",checkAurth,usrdevRoute)
+   app.use("/devpos",devposRoute)
   /* 
     app.use("/api/groups",groupRoute)
-    app.use("/api/edges",edgeRoute)
     app.use("/api/devlocs",devposRoute)
-    app.use("/api/locations",locRoute)
 
-    app.use("/api/userdevices",usrdevRoute)
+
     */
 }

@@ -3,50 +3,64 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-      <a class="navbar-brand" href="#">MyIot App</a>
+      <a class="navbar-brand" href="#">MyIot</a>
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item active">
           <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/users">Users</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link"href="/devices">Devices</a>
-       </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Lawns
+          </a>
+          <div class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink1">
+            <a class="dropdown-item" href="/locations">Locations</a>
+            <a class="dropdown-item" href="/devpos">Positions</a>
+          </div>
+        </li> 
+        <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
             Users Devices
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="/users">Add User</a>
-            <a class="dropdown-item" href="/devices">Add Device</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/users">Users</a>
+            <a class="dropdown-item" href="/devices">Devices</a>
+            <a class="dropdown-item" href="/userdev">User Devices</a>
+            <a class="nav-item"><hr class="border-top"></a>
+            <a class="dropdown-item" href="/edges">Edge Nodes</a>
           </div>
         </li>
-     
-        <li class="nav-item">
-          <a class="nav-link"href="/locations">Locations</a>
-        </li>     
+         
       </ul>
       
       <form class="form-inline my-2 my-lg-0">
-        <a class="nav-link" href="/logout">Logout</a>
-       
-        <label>User:</label> 
-        <% stuff = typeof stuff !== 'object' ? {} : stuff %>
-        <% if(user) { %>
-          <%=user.fname%>
-        <%} else {%>
-          <%='[Unknown]'%>
-          <%} %>
-        <!--
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        -->
+        <a class="nav-link" href="/logout"><strong>Logout</strong></a>
       </form>
-      
-   
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span> 
+                <strong class="text-primary">
+                  <% if(user){%><%=user.fname%><%}%>  
+                </strong>
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="divider"></li>
+                <li>
+                    <div class="navbar-login navbar-login-session">
+                      <div class="row text-center">                        
+                      <div class="col-md-12">                               
+                        <a href="/users/view/<%=user.rowid%>" class="btn-link btn-primary ">Profile</a>
+                        <a class="nav-item"><hr class="border-top"></a>
+                        <a href="/users/chpwd/<%=user.rowid%>" class="btn-link btn-info">Change Password</a>                               
+                      </div>                            
+                    </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>  
     </div>
-  </nav>
+</nav>
   
