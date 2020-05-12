@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const cors= require("cors");    
 const passport=require("passport")
 const flash=require("express-flash")
-const session=require("express-session")
 const http=require("http");
 const path=require("path")
 const initializePassport=require('./app/middleware/passport-config').initialize
@@ -20,20 +19,17 @@ app.use(bodyParser.json());
 
  //UI use.. 
 app.use(cors(corsOptions));
+app.use(express.static(path.join(__dirname,"app/assets")));
 app.use(express.static(path.join(__dirname, 'assets')));
-app.use(express.static("./app/assets"))
 //UI Use ,<-end
 
 app.use(express.urlencoded({extended:false}))
 
 app.use(express.json());
-app.use(flash())
-app.use(session({
-  secret:process.env.SESSION_SCRECT,
-  resave:false,
-  saveUninitialized:false
-}))
 
+
+require("./app/middleware/sessionstate")(app)
+app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
 
@@ -41,7 +37,7 @@ app.use(passport.session())
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // to get the user variable in view files as local variables
-app.use(function (req, res, next) {res.locals.user=req.user;next();});
+app.use(function (req, res, next) {res.locals.user=req.user;res.locals.message=req.flash('error');next();});
 
 //Api routes for app
 require("./app/routes/api")(app)
@@ -52,7 +48,7 @@ require("./app/routes/UI")(app)
 app.post('/login',passport.authenticate('local',{
   successRedirect:'/home',
   failureRedirect:'/login',
-  failureFlash:true
+  failureFlash:"Invalid Email/Password !"
 }))
 
 // set port, listen for requests
