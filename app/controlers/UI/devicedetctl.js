@@ -6,7 +6,7 @@ const edgedevices=require("../../services/edgecontroler");
 const locationService=require("../../services/location");
 const devicePosition=require("../../services/deviceposition");
 
-const {pageResponse,pageRedirect,checkerror}=require("../../lib/ctrlResponse")
+const {pageResponse,pageRedirect,checkerror,sendJson}=require("../../lib/ctrlResponse")
 const Op = require('sequelize').Op;
 var mode="list";
 var byuser="";
@@ -53,7 +53,7 @@ class devicedetctl extends basecontroler{
     var adminid=(req.user.usertype==='ADMIN')?req.user.rowid:req.user.adminid;    
    var  byuser={referenceid:adminid};
     devicedetService.ListAllFilter(byuser,(err,result) => {
-        pageResponse(err,result,res,'./UI/common/UIlist',{pTitle:'Devices',urlRoute:'devices'});
+        pageResponse(err,result,res,'./UI/common/UIlist',{pTitle:'Devices',urlRoute:'devices',btnConfig:true});
     });
  }
 
@@ -74,16 +74,16 @@ class devicedetctl extends basecontroler{
     newrow.created_dt= newrow.updated_dt;
     devicedetService.addRow(newrow,(err,result) => {
         if(!err && result!==null){
-            newrow.userid=newrow.referenceid;
-            newrow.deviceid=result.rowid;
-            newrow.userlocation=req.user.locationid;
-            newrow.devicelocation=result.locationid;
-            newrow.access_type=result.devicetype;
-            if(newrow.positionid==="")newrow.positionid=null;
-        if(newrow.locationid==="")newrow.locationid=null;
-            userdeviceService.addRow(newrow,(err,result) => {
+           newrow.userid=newrow.referenceid;
+           newrow.deviceid=result.rowid;
+           newrow.userlocation=req.user.locationid;
+           newrow.devicelocation=result.locationid;
+           newrow.access_type=result.devicetype;
+           if(newrow.positionid==="")newrow.positionid=null;
+           if(newrow.locationid==="")newrow.locationid=null;
+           userdeviceService.addRow(newrow,(err,result) => {
              if(err)checkerror(err,res,'/devices');
-            });
+           });
         }
         pageRedirect(err,result,res,'/devices');         
     });
@@ -95,12 +95,12 @@ class devicedetctl extends basecontroler{
     else {
        var newrow=req.body;       
        newrow.updated_by=req.user.username;
-        newrow.updated_dt=new Date().toISOString().replace('T', ' ').substr(0, 19);
-        if(newrow.positionid==="")newrow.positionid=null;
-        if(newrow.locationid==="")newrow.locationid=null;
-        devicedetService.updateRow(rowid,newrow,(err,result) => {
-            pageRedirect(err,result,res,'/devices');        
-        });
+       newrow.updated_dt=new Date().toISOString().replace('T', ' ').substr(0, 19);
+       if(newrow.positionid==="")newrow.positionid=null;
+       if(newrow.locationid==="")newrow.locationid=null;
+       devicedetService.updateRow(rowid,newrow,(err,result) => {
+           pageRedirect(err,result,res,'/devices');        
+       });
      }
     }  
 
@@ -150,6 +150,15 @@ class devicedetctl extends basecontroler{
     });
   }
 
+  getConfigJson(req,res)
+  {
+    var adminid=(req.user.usertype==='ADMIN')?req.user.rowid:req.user.adminid;    
+    var  byuser={referenceid:adminid};
+     devicedetService.getConfigJson(byuser,(err,result)=>{
+        sendJson(err,result,res,"devices.json");            
+     });
+  }
+ 
     getAllEdges(req,res){
         devicedetService.getAllEdges((err,result) => {
         sendResponse(err,result,res);

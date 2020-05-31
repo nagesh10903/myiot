@@ -2,9 +2,10 @@ const router=require("express").Router();
 const devdetctl=require("../../controlers/UI/devicedetctl")
 
 router.get("/",devdetctl.getAll);
+router.get("/add",devdetctl.getByIdAdd);
+router.get("/config",devdetctl.getConfigJson);
 router.get("/:id/edges",devdetctl.getEdgeDevice);
 router.get("/view/:id",devdetctl.getById);
-router.get("/add",devdetctl.getByIdAdd);
 router.get("/edit/:id",devdetctl.getById);
 
 

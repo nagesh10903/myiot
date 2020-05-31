@@ -2,8 +2,9 @@ const router=require("express").Router();
 const usrctl=require("../../controlers/UI/userctl")
 
 router.get("/",usrctl.getAll);
-router.get("/view/:id",usrctl.getById);
 router.get("/add",usrctl.getByIdAdd);
+router.get("/config",usrctl.getConfigJson);
+router.get("/view/:id",usrctl.getById);
 router.get("/edit/:id",usrctl.getById); 
 router.get("/chpwd/:id",usrctl.chagePassword);
 

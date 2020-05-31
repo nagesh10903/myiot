@@ -4,7 +4,30 @@ class ctrlResponse{
 
   constructor(){
   }
-    sendResponse(err,result,res)
+  sendJson(err,result,res,filename)
+  { if(err)
+      {
+        //  console.log(err)
+          logger.error(err)
+          return res.status(500).json({
+              sucess:0,
+              message:"DB error!"
+          });
+      }
+      if(result===null || result==0){
+          logger.info("Record not Found!")
+          return res.status(400).json({
+              sucess:0,
+              message:"Record not Found!"
+          });
+      }
+        res.setHeader('Content-Type', 'application/json');
+        res.setHeader('Content-disposition','attachment; filename='+filename);
+        return res.send( result );
+        
+  }
+  
+   sendResponse(err,result,res)
     { if(err)
         {
           //  console.log(err)
@@ -24,8 +47,9 @@ class ctrlResponse{
         return res.status(200).json({
             sucess:1,
            data:result
-        });
+        });  
     }
+    
     pageResponse(err,result,res,viewPage,pageData)
     { if(err)
         {

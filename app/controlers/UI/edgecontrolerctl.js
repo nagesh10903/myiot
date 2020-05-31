@@ -52,42 +52,43 @@ class edgectl extends basecontroler{
         pageResponse(err,result,res,'./UI/common/UIlist',{pTitle:'Edge Devices',urlRoute:'edges'});
     });
  } 
-     add(req,res){
-        var newrow=req.body;
-        if(req.user.usertype==='ADMIN')newrow.userid=req.user.rowid;
-        else newrow.userid=req.user.adminid;
-        newrow.created_by=req.user.username;
-        newrow.updated_by=req.user.username;
-        newrow.updated_dt=new Date().toISOString().replace('T', ' ').substr(0, 19);
-        newrow.created_dt= newrow.updated_dt;
-        edgeService.addRow(newrow,(err,result) => {           
-          if(err)checkerror(err,res,'back');              
-            else {
-            pageRedirect(err,result,res,'/edges'); 
-            }        
-        });
-     } 
-    
-     update(req,res){
-         var rowid=(req.body.rowid!==null)?req.body.rowid:req.params.id;    
-        if(rowid===null || rowid==='')checkerror(err,res,'back');
+ add(req,res){
+    var newrow=req.body;
+    console.log(newrow);
+    if(req.user.usertype==='ADMIN')newrow.userid=req.user.rowid;
+    else newrow.userid=req.user.adminid;
+    newrow.created_by=req.user.username;
+    newrow.updated_by=req.user.username;
+    newrow.updated_dt=new Date().toISOString().replace('T', ' ').substr(0, 19);
+    newrow.created_dt= newrow.updated_dt;
+    edgeService.addRow(newrow,(err,result) => {           
+      if(err)checkerror(err,res,'back');              
         else {
-           var newrow=req.body;       
-           newrow.updated_by=req.user.username;
-            newrow.updated_dt=new Date().toISOString().replace('T', ' ').substr(0, 19);
-            edgeService.updateRow(rowid,newrow,(err,result) => {
-                pageRedirect(err,result,res,'/edges');        
-            });
-         }
-     } 
-     remove(req,res){
-        var rowid=(req.body.rowid!==null)?req.body.rowid:req.params.id;     
-        if(rowid===null || rowid==='')checkerror(err,res,'back');
-        else{
-            edgeService.deleteRowId(rowid,(err,result) => {
-               pageRedirect(err,result,res,'/edges');      
-            });
-       }
+        pageRedirect(err,result,res,'/edges'); 
+        }        
+    });
+ } 
+    
+ update(req,res){
+     var rowid=(req.body.rowid!==null)?req.body.rowid:req.params.id;    
+    if(rowid===null || rowid==='')checkerror(err,res,'back');
+    else {
+       var newrow=req.body;       
+       newrow.updated_by=req.user.username;
+        newrow.updated_dt=new Date().toISOString().replace('T', ' ').substr(0, 19);
+        edgeService.updateRow(rowid,newrow,(err,result) => {
+            pageRedirect(err,result,res,'/edges');        
+        });
      }
+ } 
+ remove(req,res){
+    var rowid=(req.body.rowid!==null)?req.body.rowid:req.params.id;     
+    if(rowid===null || rowid==='')checkerror(err,res,'back');
+    else{
+        edgeService.deleteRowId(rowid,(err,result) => {
+           pageRedirect(err,result,res,'/edges');      
+        });
+   }
+ }
 }
 module.exports=new edgectl(edgeService);

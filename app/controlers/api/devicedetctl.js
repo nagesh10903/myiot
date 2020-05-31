@@ -1,7 +1,7 @@
 
 const basecontroler=require("../basecontroler");
 const devicedetService=require("../../services/devicedetails");
-const {sendResponse}=require("../../lib/ctrlResponse")
+const {sendResponse,sendJson}=require("../../lib/ctrlResponse")
 class devicedetctl extends basecontroler{
     constructor(devicedetService){
        super(devicedetService);
@@ -50,6 +50,7 @@ class devicedetctl extends basecontroler{
          });
     }
  } 
+
 
  getEdgeDevice(req,res){
     devicedetService.getEdgeDevice(req.params.id,(err,result)=>{

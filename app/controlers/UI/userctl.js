@@ -4,7 +4,7 @@ const userService=require("../../services/user");
 const locationService=require("../../services/location");
 const bcrypt=require("bcrypt");
 const saltRounds=10;
-const {pageResponse,pageRedirect}=require("../../lib/ctrlResponse")
+const {pageResponse,pageRedirect,sendJson}=require("../../lib/ctrlResponse")
 const Op = require('sequelize').Op;
 var mode="list";
 var byuser="";
@@ -49,7 +49,7 @@ class userctl extends basecontroler{
  getAll(req,res){
     var byuser=(req.user.usertype==='ADMIN')?{[Op.or]:[{rowid:req.user.rowid},{adminid:req.user.rowid}]}:{[Op.or]:[{rowid:req.user.adminid},{adminid:req.user.adminid}]};
     userService.ListAllFilter(byuser,(err,result) => {
-        pageResponse(err,result,res,'./UI/common/UIlist',{pTitle:'User',urlRoute:'users'});        
+        pageResponse(err,result,res,'./UI/common/UIlist',{pTitle:'User',urlRoute:'users',btnConfig:true});        
     });
  }
  
@@ -62,7 +62,7 @@ class userctl extends basecontroler{
      newuser.updated_by=req.user.username;
      newuser.updated_dt=new Date().toISOString().replace('T', ' ').substr(0, 19);
      newuser.created_dt= newuser.updated_dt;
-     if(newrow.locationid==="")newrow.locationid=null;
+     if(newuser.locationid==="")newuser.locationid=null;
     userService.addRow(newuser,(err,result) => {
         pageRedirect(err,result,res,'/users');       
     });
@@ -76,7 +76,7 @@ class userctl extends basecontroler{
         var newuser=req.body;       
          newuser.updated_by=req.user.username;
          newuser.updated_dt=new Date().toISOString().replace('T', ' ').substr(0, 19);
-        if(newrow.locationid==="")newrow.locationid=null;
+        if(newuser.locationid==="")newuser.locationid=null;
          userService.updateRow(rowid,newuser,(err,result) => {
             pageRedirect(err,result,res,'/users');      
          });
@@ -139,6 +139,13 @@ getUserLocation(req,res){
         pageResponse(err,result,res);            
     });
 }
+getConfigJson(req,res){
+    var byuser=(req.user.usertype==='ADMIN')?{[Op.or]:[{rowid:req.user.rowid},{adminid:req.user.rowid}]}:{[Op.or]:[{rowid:req.user.adminid},{adminid:req.user.adminid}]};
+       userService.getConfigJson(byuser,(err,result) => {       
+        sendJson(err,result,res,"user.json");            
+    });
+}
+
 }
 
 module.exports=new userctl(userService);
