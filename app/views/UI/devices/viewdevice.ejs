@@ -1,0 +1,159 @@
+<h3>User</h3>
+<form action="/devices/<%=pageData.action%>" method="POST">
+
+        <input type="hidden" id="rowid" name="rowid" value="<%=result.rowid%>" >   
+        <div class="form-group row">
+            <label for="devicename" class="col-sm-2 col-form-label">Device Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="devicename" name="devicename" 
+              disabled   value="<%=result.devicename %>" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="tech_name" class="col-sm-2 col-form-label">Technical Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="tech_name"  name="tech_name"  
+              disabled   value= "<%=result.tech_name %>" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="tech_model" class="col-sm-2 col-form-label">Model</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="tech_model"  name="tech_model"  
+              disabled   value="<%=result.tech_model %>" > 
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="ip" class="col-sm-2 col-form-label">IP</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="ip" name="ip" 
+              disabled   value="<%=result.ip %>" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="mac" class="col-sm-2 col-form-label">MAC</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="mac"  name="mac"  
+              disabled   value="<%=result.mac %>" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="devicetype" class="col-sm-2 col-form-label">Type</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="devicetype"  name="devicetype"  
+              disabled   value= "<%=result.devicetype %>" >
+            </div>
+  
+                <label for="devicecategory" class="col-sm-1 col-form-label">Category</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="devicecategory" name="devicecategory" 
+                  disabled   value= "<%=result.devicecategory %>" >
+                </div>
+        
+                <label for="devicemode" class="col-sm-1 col-form-label">Mode</label>
+                <div class="col-sm-2">
+                 <select class="form-control" id="devicemode" name="devicemode" disabled value="<%=result.devicemode%>">
+                  <option value="DEFAULT" selected>Default</option> 
+                  <option value="GATEWAY">Gateway</option>
+                  <option value="CONTROLER">Controler</option>
+                  <option value="NODE" >Node</option> 
+                  <option value="MODEM" >Modem</option> 
+                  <option value="EDGE" >Edge Node</option>       
+                 </select>
+                </div>
+            </div>
+                 
+            <div class="form-group row">
+              <label for="label" class="col-sm-2 col-form-label">Labels</label>
+              <div class="col-sm-10">
+                  <input type="text" class="form-control" id="label" name="label" 
+                disabled   value= "<%=result.label %>" >
+              </div>
+          </div>
+               
+          <div class="form-group row">
+            <label for="interfaces" class="col-sm-2 col-form-label">Interfaces</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="interfaces" name="interfaces" 
+              disabled   value= "<%=result.interfaces %>" >
+            </div>
+        </div>
+          
+            <div class="form-group row">
+                <label for="connectivity" class="col-sm-2 col-form-label">Connectivity</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="connectivity" name="connectivity" 
+                  disabled   value= "<%=result.connectivity %>" >
+                </div>
+            </div>
+
+        <div class="form-group row">
+          <label for="locationid" class="col-sm-2 col-form-label">Device Location</label>
+          <div class="col-sm-10">
+           <select class="form-control" id="locationid" name="locationid"   disabled           
+            value="<% if (result!==null) { %><%=result.locationid%><%}%>"> 
+            <option value="" selected>Select a Location</option>
+            <%  pageData.locations.forEach( row =>{   %>       
+              <option value="<%= row['rowid'] %>"><%=row['locationname']+'('+ row['locationtype']+','+row['address'] +')' %> </option>     
+               <%  });  %>
+           </select>
+          </div>
+      </div>
+      <div class="form-group row">
+          <label for="positionid" class="col-sm-2 col-form-label">Device Position</label>
+          <div class="col-sm-10">
+           <select class="form-control" id="positionid" name="positionid"    disabled        
+            value="<% if (result!==null) { %><%=result.positionid%><%}%>"> 
+            <option value="" selected>Select a Controler device</option>  
+            <%  pageData.deviceposition.forEach( row =>{   %>       
+              <option value="<%= row['rowid'] %>"><%=row['room']+'('+ row['hor_pos']+','+row['ver_pos'] +')' %> </option>     
+               <% });%>
+           </select>
+          </div>
+      </div>
+            <div class="form-group row">
+                <label for="value_a" class="col-sm-2 col-form-label">Value_A</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="value_a" name="value_a" 
+                  disabled   value= "<%=result.value_a %>" >
+                </div>
+            
+                <label for="value_i" class="col-sm-2 col-form-label">Value_i</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="value_i" name="value_i" 
+                  disabled   value= "<%=result.value_i %>" >
+                </div>
+          
+                <label for="value_j" class="col-sm-1 col-form-label">Value_J</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="value_j" name="value_j" 
+                  disabled   value= "<%=result.value_j %>" >
+                </div>
+            </div>
+       
+        
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">  
+                <%if(pageData.action==="delete"  && user.usertype==="ADMIN"){%>                
+                <button type="submit" class="btn btn-primary">Delete</button>
+                <%}%>
+                <%if(pageData.mode==="view" && user.usertype==="ADMIN"){%>                
+                    <a href="/<%=pageData.urlRoute%>/edit/<%=result.rowid%>" class="btn btn-primary">Edit</a>
+                    <%if(result.devicemode==="CONTROLER"){%>
+                      <a href="/<%=pageData.urlRoute%>/<%=result.rowid%>/edges" class="btn btn-primary">Edge Nodes</a>
+                    <%}%>
+                <%}%>
+              
+                <a href="javascript:history.back()"  class="btn btn-primary">Back</a>
+            </div>
+        </div>
+        
+</form>
+
+<script>
+  $(function() {
+      $("#devicemode").val("<%=result.devicemode%>");
+      $("#positionid").val("<%=result.positionid%>");  
+      $("#locationid").val("<%=result.locationid%>"); 
+  });
+</script>

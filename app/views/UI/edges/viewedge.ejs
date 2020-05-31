@@ -1,0 +1,131 @@
+<h3>User</h3>
+<form action="/edges/<%=pageData.action%>" method="POST">
+
+        <input type="hidden" id="rowid" name="rowid" value="<%=result.rowid%>" > 
+
+        <input type="hidden" id="deviceid" name="deviceid" value="<%=result['devicedetail.rowid']%>" > 
+        <div class="form-group row">
+            <label for="device" class="col-sm-2 col-form-label">Controler Device</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="device" name="device" 
+              disabled   value="<%=result['devicedetail.devicename']+'('+ result['devicedetail.devicetype']+','+result['devicedetail.tech_name'] +')' %> " >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Device Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name" 
+              disabled   value="<%=result.name %>" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="tech_name" class="col-sm-2 col-form-label">Technical Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="tech_name"  name="tech_name"  
+              disabled   value= "<%=result.tech_name %>" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="pin_type" class="col-sm-2 col-form-label">PIN Type</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="pin_type"  name="pin_type"  
+              disabled   value="<%=result.pin_type %>" > 
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="pinid" class="col-sm-2 col-form-label">PIN ID</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="pinid" name="pinid" 
+              disabled   value="<%=result.pinid %>" >
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="pin" class="col-sm-2 col-form-label">PIN No.</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="pin"  name="pin"  
+              disabled   value="<%=result.pin %>" >
+            </div>
+        </div>       
+            <div class="form-group row">
+                <label for="category_control" class="col-sm-2 col-form-label">Category</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="category_control" name="category_control" 
+                  disabled   value= "<%=result.category_control %>" >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="mode_control" class="col-sm-2 col-form-label">Mode</label>
+                <div class="col-sm-10">
+                 <select class="form-control" id="mode_control" name="mode_control" disabled value="<%=result.mode_control%>">
+                  <option value="DEFAULT" selected>Default</option> 
+              <option value="IR">IR</option>
+              <option value="WIFI" >WiFi</option> 
+              <option value="BLE" >Bluetooth</option> 
+              <option value="MANUAL" >Manual</option>     
+                 </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="label" class="col-sm-2 col-form-label">Labels</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="label" name="label" 
+                    value="<%=result.label%>" placeholder="Labels">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="value_a" class="col-sm-2 col-form-label">Value_A</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="value_a" name="value_a" 
+                  disabled   value= "<%=result.value_a %>" >
+                </div>
+
+                <label for="value_i" class="col-sm-1 col-form-label">Value_i</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="value_i" name="value_i" 
+                  disabled   value= "<%=result.value_i %>" >
+                </div>
+
+                <label for="value_j" class="col-sm-1 col-form-label">Value_J</label>
+                <div class="col-sm-2">
+                    <input type="text" class="form-control" id="value_j" name="value_j" 
+                  disabled   value= "<%=result.value_j %>" >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="locationid" class="col-sm-2 col-form-label">Location</label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control" id="locationid" name="locationid" 
+                    value="<%=result.locationid%>" readonly>
+                </div>
+    
+                <label for="positionid" class="col-sm-1 col-form-label">Position</label>
+                <div class="col-sm-1">
+                    <input type="text" class="form-control" id="positionid" name="positionid" 
+                    value="<%=result.positionid%>" readonly>
+                </div>
+            </div>
+        
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">  
+                <%if(pageData.action==="delete"  && user.usertype==="ADMIN"){%>                
+                <button type="submit" class="btn btn-primary">Delete</button>
+                <%}%>
+                <%if(pageData.mode==="view" && user.usertype==="ADMIN"){%>                
+                    <a href="/<%=pageData.urlRoute%>/edit/<%=result.rowid%>" class="btn btn-primary">Edit</a>
+                <%}%>
+              
+                <a href="javascript:history.back()"  class="btn btn-primary">Back</a>
+            </div>
+        </div>
+        <div>
+          <%if(typeof message!='undefined'){%>
+              <p class="text-center text-danger text-bold"><%=message%></p>
+          <%}%>
+         </div> 
+</form>
+<script>
+    $(function() {
+        $("#mode_control").val("<%=result.mode_control%>");
+  
+    });
+</script>

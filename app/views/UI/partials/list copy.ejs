@@ -1,0 +1,29 @@
+    <table class="table table-striped table-hover table-sm table-bordered table-responsive text-nowrap small">
+      <thead class="thead-dark">
+    <tr class="small">
+        <%  for(var k in result[0]){  
+           if(k.toUpperCase()!=='ROWID' ){
+          %>
+            <th><%= k.toUpperCase() %> </th>
+           <%  }}; %>
+           <th> 
+           
+          </th>
+      </tr>
+      </thead>
+      <% result.forEach( row =>{   %>
+        <tr>
+       <%  for(var k in row){  
+          if(k.toUpperCase()!=='ROWID' ){  %>
+        <td><%= row[k] %> </td>
+       <%  }}; %>
+       <td class="small">
+  
+           <a href="/<%=baseurl%>/view/<%=row['rowid']%>" class="btn btn-info btn-xs ">View</a>
+        
+          </td>
+    </tr>
+      <%  }) %>   
+    
+    </table>
+    

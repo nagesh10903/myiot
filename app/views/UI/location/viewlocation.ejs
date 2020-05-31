@@ -1,0 +1,86 @@
+<h3>User</h3>
+<form action="/locations/<%=pageData.action%>" method="POST">
+
+        <input type="hidden" id="rowid" name="rowid" value="<%=result.rowid%>" >   
+    <div class="form-group row">
+        <label for="locationname" class="col-sm-2 col-form-label">Location Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control"  disabled
+            value="<%=result.locationname%>" >
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="address" class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control"
+            value="<%=result.address%>" disabled >
+          
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="address2" class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control"
+            value="<%=result.address2%>" disabled >
+          
+        </div>
+    </div>
+   
+    <div class="form-group row">
+        <label for="city" class="col-sm-2 col-form-label">City</label>
+        <div class="col-sm-10">
+            <input type="text"  class="form-control"
+            value="<%=result.city%>" disabled>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="state" class="col-sm-2 col-form-label">State</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" 
+            value="<%=result.state%>" disabled>
+        </div>
+    </div>
+   
+        <div class="form-group row">
+            <label for="phone" class="col-sm-2 col-form-label">Mobile</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" 
+                value="<%=result.phone%>" disabled>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="locationtype" class="col-sm-2 col-form-label">Location Type</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" 
+                value="<%=result.locationtype%>" disabled>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="latitude" class="col-sm-2 col-form-label">Latitude</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" 
+                value="<%=result.latitude%>" disabled>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="longitude" class="col-sm-2 col-form-label">Longitude</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" 
+                value="<%=result.longitude%>" disabled>
+            </div>
+        </div>
+ 
+        
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">  
+                <%if(pageData.action==="delete"  && user.usertype==="ADMIN"){%>                
+                <button type="submit" class="btn btn-primary">Delete</button>
+                <%}%>
+                <%if(pageData.mode==="view" && user.usertype==="ADMIN"){%>                
+                    <a href="/<%=pageData.urlRoute%>/edit/<%=result.rowid%>" class="btn btn-primary">Edit</a>
+                <%}%>
+              
+                <a href="javascript:history.back()"  class="btn btn-primary">Back</a>
+            </div>
+        </div>
+</form>

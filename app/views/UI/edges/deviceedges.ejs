@@ -1,0 +1,14 @@
+
+<h4><%=pageData.pTitle%> for  Device </h4>
+ 
+ <div>
+  <%- include('../partials/viewlist.ejs',{data:pageData.device})%>
+ </div>
+ 
+ <hr/>
+ <div>
+ <%- include('../common/UIlist.ejs',{baseurl:pageData.urlRoute,backUrl:pageData.backUrl})%>
+</div>
+<div class="text-center">
+    <a href="javascript:history.back()"  class="btn btn-primary">Back</a>
+</div>

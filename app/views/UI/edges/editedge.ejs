@@ -1,0 +1,141 @@
+<h3>User</h3>
+<form action="/edges/<%=pageData.action%>" method="post" >
+    <%if(pageData.action==='edit'){%>
+        <input type="hidden" id="rowid" name="rowid" value="<% if (result!==null) { %><%=result.rowid%><%}%>" >
+    <%}%>
+    <div class="form-group row">
+        <label for="deviceid" class="col-sm-2 col-form-label">Controler Device</label>
+        <div class="col-sm-10">
+         <select class="form-control" id="deviceid" name="deviceid" required 
+         <%if(pageData.action==='edit'){%><%='disabled'%> <%}%>
+          value="<% if (result!==null) { %><%=result.deviceid%><%}%>">         
+          <%if(pageData.action==='edit'){%> 
+         <option value="<%=result.deviceid%>"><%=result['devicedetail.devicename']+'('+ result['devicedetail.devicetype']+','+result['devicedetail.tech_name'] +')' %> </option>     
+        
+          <%}  else {%>   
+            <option value="" selected>Select a Controler device</option>  
+            <%  pageData.devices.forEach( row =>{   %>       
+                <option value="<%= row['rowid'] %>"><%=row['devicename']+'('+ row['devicetype']+','+row['tech_name'] +')' %> </option>     
+                 <%  }); } %>
+         </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Edge Device Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" <%if(pageData.action==='edit'){%><%='disabled'%> <%}%>
+            value="<% if (result!==null) { %><%=result.name%><%}%>" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="tech_name" class="col-sm-2 col-form-label">Technical Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="tech_name"  name="tech_name"  
+            value="<% if (result!==null) { %><%=result.tech_name%><%}%>"  placeholder="Technical Name" 
+           required>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label for="pin_type" class="col-sm-2 col-form-label">PIN Type</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="pin_type"  name="pin_type"  
+            value="<% if (result!==null) { %><%=result.pin_type%><%}%>" placeholder="PIN Type">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="pinid" class="col-sm-2 col-form-label">PIN ID</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="pinid" name="pinid" 
+            value="<% if (result!==null) { %><%=result.pinid%><%}%>" placeholder="Pin Id">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="pin" class="col-sm-2 col-form-label">PIN No</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="pin" name="pin" 
+            value="<% if (result!==null) { %><%=result.pin%><%}%>" placeholder="Pin No.">
+        </div>
+    </div>
+        <div class="form-group row">
+            <label for="category_control" class="col-sm-2 col-form-label">Category</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="category_control" name="category_control" 
+                value="<% if (result!==null) { %><%=result.category_control%><%}%>" placeholder="Category ">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="mode_control" class="col-sm-2 col-form-label">Mode</label>
+            <div class="col-sm-10">
+             <select class="form-control" id="mode_control" name="mode_control" >
+              value="<% if (result!==null) { %><%=result.mode_control%><%}%>">
+              <option value="DEFAULT" selected>Default</option> 
+              <option value="IR">IR</option>
+              <option value="WIFI" >WiFi</option> 
+              <option value="BLE" >Bluetooth</option> 
+              <option value="MANUAL" >Manual</option>       
+             </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="label" class="col-sm-2 col-form-label">Labels</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="label" name="label" 
+                value="<% if (result!==null) { %><%=result.label%><%}%>" placeholder="Labels">
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="value_a" class="col-sm-2 col-form-label">Value_A</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="value_a" name="value_a" 
+                value="<% if (result!==null) { %><%=result.value_a%><%}%>" placeholder="value_a">
+            </div>
+
+            <label for="value_i" class="col-sm-1 col-form-label">Value_i</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="value_i" name="value_i" 
+                value="<% if (result!==null) { %><%=result.value_i%><%}%>" placeholder="value_i">
+            </div>
+      
+            <label for="value_j" class="col-sm-1 col-form-label">Value_J</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="value_j" name="value_j" 
+                value="<% if (result!==null) { %><%=result.value_j%><%}%>" placeholder="value_j">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="locationid" class="col-sm-2 col-form-label">Location</label>
+            <div class="col-sm-1">
+                <input type="text" class="form-control" id="locationid" name="locationid" 
+                value="<% if (result!==null) { %><%=result.locationid%><%}%>" readonly>
+            </div>
+
+            <label for="positionid" class="col-sm-1 col-form-label">Position</label>
+            <div class="col-sm-1">
+                <input type="text" class="form-control" id="positionid" name="positionid" 
+                value="<% if (result!==null) { %><%=result.positionid%><%}%>" readonly>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">               
+                <button type="submit" class="btn btn-primary" id="btnSubmit">Save</button>
+              
+                <a href="javascript:history.back()"  class="btn btn-primary">Back</a>
+            </div>
+        </div>
+</form>
+<script>
+    var  devices= <%- JSON.stringify(pageData.devices) %>;
+   
+    $(function() {
+        $("#mode_control").val("<%=result.mode_control%>");
+        $("#btnSubmit").click(()=>{            
+          var dev=devices.filter(d=>d.rowid==$("#deviceid").val())[0];         
+          $("#locationid").val(dev.locationid);
+          $("#positionid").val(dev.positionid);
+        });  
+    });
+
+    
+</script>

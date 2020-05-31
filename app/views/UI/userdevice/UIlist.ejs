@@ -1,0 +1,34 @@
+
+<h4><%=pageData.pTitle%> List </h4>
+
+<%if(user.usertype==="ADMIN"  && pageData.users.length>0 && pageData.devices.lenght>0){%>
+    <div class="container">
+        <form action="/userdev/add" class="form-inline" method="post" style="width:100%">  
+          <div class="row">
+            
+              <label for="userid" >User</label>          
+           <select class="form-control" id="userid" name="userid" >            
+            <%pageData.users.forEach( row =>{ %>
+            <option value="<%=row["rowid"]%>"><%=row["username"]+"("+row["fname"]+ ","+ row["usertype"]+")"  %> </option>
+            <%});%>
+           </select>  
+            <label for="deviceid" >Device</label>       
+         <select class="form-control" id="deviceid" name="deviceid" > 
+            <%pageData.devices.forEach( row =>{ %>
+                <option value="<%=row["rowid"]%>"><%=row["devicename"]+"("+row["devicemode"]+ ","+ row["tech_name"]+")"  %> </option>
+                <%});%>
+         </select>       
+         <button type="submit" class="btn btn-primary">Add</button>
+          </div>         
+      </form>
+   </div>
+    <%}%> 
+    <% if (typeof result[0]!=='undefined') { %>
+        <%- include('../partials/viewlist.ejs',{baseurl:pageData.urlRoute})%>
+    <%} else {%>
+        <div>
+            <p> No Records found...!  <br/>
+               Admin Can add New <%=pageData.pTitle%>
+            </p>
+        </div>
+     <%}%>  

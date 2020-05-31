@@ -1,0 +1,42 @@
+<style>
+    .popup-position{
+        display:block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0,0,0,0.7);
+        width: 100%;
+        height: 100%;
+       
+        }
+        #popup-wrapper{
+        text-align: left;
+        }
+       
+        #popup-container{
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        width: 70%;
+        margin: 70px auto;
+        
+        }
+</style>
+<div class="popup-position" id="contact-popup">
+<div class="popup-wrapper">
+    <div id="popup-container">
+
+<%- include("./editposition.ejs") %>
+</div>
+</div>
+</div>
+<script>
+    function toggle_visibility(id){
+        var e = document.getElementById(id);
+        if(e.style.display == 'block')
+        e.style.display = 'none';
+        else
+        e.style.display = 'block';
+        }
+        
+  </script>

@@ -1,0 +1,103 @@
+<h3>User</h3>
+<form action="/users/<%=pageData.action%>" method="post">
+    <%if(pageData.action==='edit'){%>
+        <input type="hidden" id="rowid" name="rowid" value="<% if (result!==null) { %><%=result.rowid%><%}%>" >
+    <%}%>
+   
+    <div class="form-group row">
+        <label for="username" class="col-sm-2 col-form-label">User Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="username" name="username" placeholder="Username" <%if(pageData.action==='edit'){%><%='disabled'%> <%}%>
+            value="<% if (result!==null) { %><%=result.username%><%}%>" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="email" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+            <input type="email" class="form-control" id="email"  name="email"  
+            value="<% if (result!==null) { %><%=result.email%><%}%>"  placeholder="Email" 
+            <%if(pageData.action==='edit'){%><%='disabled'%> <%}%> required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="passsword" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+            <input type="password" class="form-control" id="password"  name="password" placeholder="Password"
+            <%if(pageData.action==='edit'){%><%='disabled'%> <%}%> required> 
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="result.fname" class="col-sm-2 col-form-label">First Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="fname" name="fname" 
+            value="<% if (result!==null) { %><%=result.fname%><%}%>" placeholder="First Name">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="lname"  name="lname"  
+            value="<% if (result!==null) { %><%=result.lname%><%}%>" placeholder="Last Name">
+        </div>
+    </div>
+   
+        <div class="form-group row">
+            <label for="phone" class="col-sm-2 col-form-label">Mobile</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="phone" name="phone" 
+                value="<% if (result!==null) { %><%=result.phone%><%}%>" placeholder="Mobile No.">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="usertype" class="col-sm-2 col-form-label">Type</label>
+            <div class="col-sm-10">
+             <select class="form-control" id="usertype" name="usertype" <%if(pageData.action==='edit'){%><%='disabled'%> <%}%>
+              value="<% if (result!==null) { %><%=result.usertype%><%}%>">
+               <option value="USER" selected>User</option>           
+               <option value="GUEST">Guest</option>
+               <option value="ADMIN">Admin</option>
+             </select>
+            </div>
+        </div>
+       
+        <div class="form-group row">
+            <label for="usercategory" class="col-sm-2 col-form-label">Category</label>
+            <div class="col-sm-10">
+                <select class="form-control" id="usercategory" name="usercategory" value="<% if (result!==null) { %><%=result.usercategory%><%}%>">
+                  <option value="Default" selected>Default</option>           
+                  <option value="CAT01">Category1</option>
+                  <option value="CAT02">Category2</option>
+                </select>
+               </div>
+        </div>
+        <div class="form-group row">
+            <label for="locationid" class="col-sm-2 col-form-label">Device Location</label>
+            <div class="col-sm-10">
+             <select class="form-control" id="locationid" name="locationid"              
+              value="<% if (result!==null) { %><%=result.locationid%><%}%>"> 
+              <option value="" selected>Select a Location</option>  
+                <%  pageData.locations.forEach( row =>{   %>       
+                    <option value="<%= row['rowid'] %>"><%=row['locationname']+'('+ row['locationtype']+','+row['address'] +')' %> </option>     
+                     <%  }); %>
+             </select>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">               
+                <button type="submit" class="btn btn-primary">Save</button>
+              
+                <a href="javascript:history.back()"  class="btn btn-primary">Back</a>
+            </div>
+        </div>
+</form>
+
+<script>
+    $(function() {
+      $("#usertype").val("<%=result.usertype%>");
+      $("#usercategory").val("<%=result.usercategory%>");
+      $("#locationid").val("<%=result.locationid%>"); 
+  });
+
+  
+</script>

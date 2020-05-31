@@ -1,0 +1,130 @@
+<h3>Position</h3>
+<form action="/devpos/<%=pageData.action%>" method="post">
+    <%if(pageData.action==='edit'){%>
+        <input type="hidden" id="rowid" name="rowid" value="<% if (result!==null) { %><%=result.rowid%><%}%>" >
+    <%}%>
+   
+    <div class="form-group row">
+        <label for="room" class="col-sm-2 col-form-label">Lawn</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="room"  name="room" placeholder="Room"
+            value="<% if (result!==null) { %><%=result.room%><%}%>" required > 
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="label" class="col-sm-2 col-form-label">Label</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="label" name="label" 
+            value="<% if (result!==null) { %><%=result.label%><%}%>" placeholder="Room Label">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="block" class="col-sm-2 col-form-label">Block</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="block"  name="block"  
+            value="<% if (result!==null) { %><%=result.block%><%}%>" placeholder="Block">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="floor" class="col-sm-2 col-form-label">Floor</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="floor" name="floor" 
+            value="<% if (result!==null) { %><%=result.floor%><%}%>" placeholder="Floor">
+        </div>
+    </div> 
+    <div class="form-group row">
+        <label for="roomtype" class="col-sm-2 col-form-label">Room Type</label>
+        <div class="col-sm-10">
+         <select class="form-control" id="roomtype" name="roomtype" 
+          value="<% if (result!==null) { %><%=result.roomtype%><%}%>">
+          <option value="" selected >Select </option>
+          <option value="DEFAULT" >Default</option> 
+          <option value="LIVING">Living Room</option>
+          <option value="HALL" >Hall</option> 
+          <option value="BED" >Bed Room</option> 
+          <option value="LAWN" >Lawn</option> 
+          <option value="KITCHEN" >Kitchen</option> 
+          <option value="GARAGE">Garage</option>
+          <option value="OTH">Other</option>
+         </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="hor_pos" class="col-sm-2 col-form-label">Position: Horizontal</label>
+        <div class="col-sm-2">
+             <select class="form-control" id="hor_pos" name="hor_pos" required
+                value="<% if (result!==null) { %><%=result.hor_pos%><%}%>">
+                <option value="" selected>Select </option>
+                <option value="OTH">Other</option>
+                <option value="E" >East</option> 
+                <option value="W">West </option>
+                <option value="N" >North</option> 
+                <option value="S" >South</option> 
+                <option value="SE" >South East</option> 
+                <option value="SW" >South West</option> 
+                <option value="NE">Norht East</option>
+                <option value="NW">North West</option>
+               </select>
+        </div>
+
+            <label for="ver_pos" class="col-sm-1 col-form-label">Vertical</label>
+            <div class="col-sm-2">
+              <select class="form-control" id="ver_pos" name="ver_pos" required
+                value="<% if (result!==null) { %><%=result.hor_pos%><%}%>">
+                <option value="" selected >Select </option>
+                <option value="OTH">Ohter</option>
+                <option value="UP" >Up</option> 
+                <option value="MID" >Middle</option> 
+                <option value="DN">Down </option>
+                <option value="FL" >Floor</option> 
+                <option value="CE" >Ceiling</option>                
+               </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="type_pos" class="col-sm-2 col-form-label">Position Type</label>
+            <div class="col-sm-10">
+             <select class="form-control" id="type_pos" name="type_pos" 
+              value="<% if (result!==null) { %><%=result.type_pos%><%}%>" >
+              <option value="" selected >Select </option>
+              <option value="DEFAULT" >Default</option> 
+              <option value="ROOF">Roof/Terrace</option>
+              <option value="FLOOR" >Floor</option>    
+              <option value="CELLAR" >Cellar</option>            
+             </select>
+            </div>
+        </div>
+      
+        <div class="form-group row">
+            <label for="lat" class="col-sm-2 col-form-label">Latitude</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="lat" name="lat" 
+                value="<% if (result!==null) { %><%=result.lat%><%}%>" placeholder="Latitude">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lng" class="col-sm-2 col-form-label">Longitude</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="lng" name="lng" 
+                value="<% if (result!==null) { %><%=result.lng%><%}%>" placeholder="Longitude">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">               
+                <button type="submit" class="btn btn-primary">Save</button>
+              
+                <a href="javascript:history.back()" 
+                 class="btn btn-primary">close</a>
+            </div>
+        </div>
+</form>
+
+<script>
+    $(function() {
+        $("#roomtype").val("<%=result.roomtype%>");
+        $("#type_pos").val("<%=result.type_pos%>");  
+        $("#hor_pos").val("<%=result.hor_pos%>");
+        $("#ver_pos").val("<%=result.ver_pos%>"); 
+    });
+    
+  </script>

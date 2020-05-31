@@ -1,0 +1,159 @@
+<h3>User</h3>
+<form action="/devices/<%=pageData.action%>" method="post">
+    <%if(pageData.action==='edit'){%>
+        <input type="hidden" id="rowid" name="rowid" value="<% if (result!==null) { %><%=result.rowid%><%}%>" >
+    <%}%>
+   
+    <div class="form-group row">
+        <label for="devicename" class="col-sm-2 col-form-label">Device Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="devicename" name="devicename" placeholder="Devicename" <%if(pageData.action==='edit'){%><%='disabled'%> <%}%>
+            value="<% if (result!==null) { %><%=result.devicename%><%}%>" required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="tech_name" class="col-sm-2 col-form-label">Technical Name</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="tech_name"  name="tech_name"  
+            value="<% if (result!==null) { %><%=result.tech_name%><%}%>"  placeholder="Technical Name" 
+           required>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="tech_model" class="col-sm-2 col-form-label">Model</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="tech_model"  name="tech_model" placeholder="Model"
+            value="<% if (result!==null) { %><%=result.tech_model%><%}%>"  > 
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="ip" class="col-sm-2 col-form-label">IP</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="ip" name="ip" 
+            value="<% if (result!==null) { %><%=result.ip%><%}%>" placeholder="IP">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="mac" class="col-sm-2 col-form-label">MAC</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="mac"  name="mac"  
+            value="<% if (result!==null) { %><%=result.mac%><%}%>" placeholder="MAC">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="devicetype" class="col-sm-2 col-form-label">Type</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="devicetype"  name="devicetype"  
+            value="<% if (result!==null) { %><%=result.devicetype%><%}%>" placeholder="Type">
+        </div>
+    
+            <label for="devicecategory" class="col-sm-1 col-form-label">Category</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="devicecategory" name="devicecategory" 
+                value="<% if (result!==null) { %><%=result.devicecategory%><%}%>" placeholder="Category">
+            </div>
+ 
+            <label for="devicemode" class="col-sm-1 col-form-label">Mode</label>
+            <div class="col-sm-2">
+             <select class="form-control" id="devicemode" name="devicemode" >
+              value="<% if (result!==null) { %><%=result.devicemode%><%}%>">
+              <option value="DEFAULT" selected>Default</option> 
+              <option value="CONTROLER">Controler</option>
+              <option value="GATEWAY">Gateway</option>
+              <option value="NODE" >Node</option> 
+              <option value="MODEM" >Modem</option> 
+              <option value="EDGE" >Edge Node</option>       
+             </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="label" class="col-sm-2 col-form-label">Labels</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="label" name="label" 
+                value="<% if (result!==null) { %><%=result.label%><%}%>" placeholder="Labels">
+            </div>
+        </div>
+             
+        <div class="form-group row">
+          <label for="interfaces" class="col-sm-2 col-form-label">Interfaces</label>
+          <div class="col-sm-10">
+              <input type="text" class="form-control" id="interfaces" name="interfaces" 
+              value="<% if (result!==null) { %><%=result.interfaces%><%}%>" placeholder="Interfaces">
+          </div>
+      </div>
+        <div class="form-group row">
+            <label for="connectivity" class="col-sm-2 col-form-label">Connectivity</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="connectivity" name="connectivity" 
+                value="<% if (result!==null) { %><%=result.connectivity%><%}%>" placeholder="Connectivity">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="locationid" class="col-sm-2 col-form-label">Device Location</label>
+            <div class="col-sm-10">
+             <select class="form-control" id="locationid" name="locationid"              
+              value="<% if (result!==null) { %><%=result.locationid%><%}%>"> 
+              <option value="" selected>Select a Location</option>
+                <%  pageData.locations.forEach( row =>{   %>       
+                    <option value="<%= row['rowid'] %>"><%=row['locationname']+'('+ row['locationtype']+','+row['address'] +')' %> </option>     
+                     <%  });  %>
+             </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="positionid" class="col-sm-2 col-form-label">Device Position</label>
+            <div class="col-sm-4">
+             <select class="form-control" id="positionid" name="positionid"            
+              value="<% if (result!==null) { %><%=result.positionid%><%}%>"> 
+              <option value="" selected>Select Device  Position</option>          
+              <%  pageData.deviceposition.forEach( row =>{   %>       
+                    <option value="<%= row['rowid'] %>"><%=row['room']+'('+ row['hor_pos']+','+row['ver_pos'] +')' %> </option>     
+                     <% });%>
+             </select>
+            </div>
+            <a href="/devpos/new" class="btn btn-warning"  id="newposition">New Position</a>
+        </div>
+
+        <div class="form-group row">
+            <label for="value_a" class="col-sm-2 col-form-label">Value_A</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="value_a" name="value_a" 
+                value="<% if (result!==null) { %><%=result.value_a%><%}%>" placeholder="value_a">
+            </div>
+
+            <label for="value_i" class="col-sm-1 col-form-label">Value_i</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="value_i" name="value_i" 
+                value="<% if (result!==null) { %><%=result.value_i%><%}%>" placeholder="value_i">
+            </div>
+      
+            <label for="value_j" class="col-sm-1 col-form-label">Value_J</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="value_j" name="value_j" 
+                value="<% if (result!==null) { %><%=result.value_j%><%}%>" placeholder="value_j">
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <div class="col-sm-10 offset-sm-2">               
+                <button type="submit" class="btn btn-primary">Save</button>
+              
+                <a href="javascript:history.back()"  class="btn btn-primary">Back</a>
+            </div>
+        </div>
+        <div>
+            <%if(typeof message!='undefined'){%>
+                <p class="text-center text-danger text-bold"><%=message%></p>
+            <%}%>
+           </div> 
+</form>
+
+<script>
+    $(function() {
+        $("#devicemode").val("<%=result.devicemode%>");  
+        $("#positionid").val("<%=result.positionid%>");  
+        $("#locationid").val("<%=result.locationid%>");         
+    });
+    
+  </script>
