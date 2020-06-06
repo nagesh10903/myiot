@@ -1,1 +1,9 @@
-Home
+<div class="container">
+
+    <% if(pageData.homeUrl==="#") { %>
+         <a href="#" class="btn btn-link">Home(Offline)</a>   
+        <%} else {%>
+            <a href=<%=pageData.homeUrl%> class="btn btn-link" >Home(Online) </a>   
+            <%}%>
+
+</div>

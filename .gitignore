@@ -1,0 +1,7 @@
+**/node_modules
+**/logs
+./node_modules
+./logs
+*.zip
+.metals
+*.pp*

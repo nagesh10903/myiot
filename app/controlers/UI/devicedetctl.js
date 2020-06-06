@@ -150,6 +150,7 @@ class devicedetctl extends basecontroler{
     });
   }
 
+
   getConfigJson(req,res)
   {
     var adminid=(req.user.usertype==='ADMIN')?req.user.rowid:req.user.adminid;    

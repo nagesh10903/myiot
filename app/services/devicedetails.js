@@ -1,6 +1,7 @@
 const baseservice=require("./baseservice");
 const dbmodels=require("../models/db")
 const Sequelize = require("sequelize");
+const {Op} = require("sequelize");
 class devicedetails extends baseservice
 {
  constructor(model){
@@ -34,6 +35,15 @@ class devicedetails extends baseservice
             this.errcheck(tbl,error,callback); 
          })
         }
+
+    getPublicIp(byuser,callback){
+        var condi={[Op.and]:[byuser,{"devicetype":"NETWORK"},{"devicecategory":"ROUTER"}]}
+        this.model.findOne({where:condi,attributes:['ip','value_a','devicetype','devicecategory'],
+              raw:true})
+      .then((tbl,error)=>{
+        this.errcheck(tbl,error,callback);              
+    });
+    }
 
     getConfigJson(byuser,callback)
     {

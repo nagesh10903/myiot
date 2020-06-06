@@ -6,6 +6,7 @@ var locRoute=require("./location")
 var edgeRoute=require("./edge")
 var usrdevRoute=require("./userdevices")
 var devposRoute=require("./devicepos")
+var homeRoute=require("./home")
 /*
 
 var groupRoute=require("./group")
@@ -29,11 +30,7 @@ module.exports=(app)=>{
   app.get('/login',checkNotAurth,(req,res)=>{
       res.render('login',{ layout: './UI/layout/LoginLayout' })
      })
-  
-  app.get('/home',checkAurth,(req,res)=>{
-       res.render('./UI/home')
-      })
-      
+        
   app.get('/logout',(req,res)=>{
      req.logOut()
      req.session.destroy((err)=>{
@@ -48,6 +45,8 @@ module.exports=(app)=>{
    app.use("/edges",checkAurth,edgeRoute)
    app.use("/userdev",checkAurth,usrdevRoute)
    app.use("/devpos",devposRoute)
+   app.use("/home",checkAurth,homeRoute)
+
   /* 
     app.use("/api/groups",groupRoute)
     app.use("/api/devlocs",devposRoute)
