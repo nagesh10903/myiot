@@ -10,8 +10,7 @@ class edgectl extends basecontroler{
     constructor(edgeService){
        super(edgeService);
        this.svr=edgeService;
-     }
-   
+     }   
  
  getById(req,res){
     mode=(req.route.path.startsWith('/edit'))?'edit':(req.route.path.startsWith('/add'))?'add':'view';

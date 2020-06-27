@@ -1,0 +1,257 @@
+
+<div class="container">
+<html>
+<head> 
+    <meta charset="UTF-8">
+<title>MyIot App</title>
+
+<script src="/js/jquery.js"></script>
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<!--
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+-->
+
+<style>
+    body    { padding-top:0px; }
+</style>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" href="#">MyIot</a>
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link" href="/home">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Lawns
+          </a>
+          <div class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink1">
+            <a class="dropdown-item" href="/locations">Locations</a>
+            <a class="dropdown-item" href="/devpos">Positions</a>
+          </div>
+        </li> 
+        <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Users Devices
+          </a>
+          <div class="dropdown-menu text-center" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="/users">Users</a>
+            <a class="dropdown-item" href="/devices">Devices</a>
+            <a class="dropdown-item" href="/userdev">User Devices</a>
+            <a class="nav-item"><hr class="border-top"></a>
+            <a class="dropdown-item" href="/edges">Edge Nodes</a>
+          </div>
+        </li>
+         
+      </ul>
+      
+      <form class="form-inline my-2 my-lg-0">
+        <a class="nav-link" href="/logout"><strong>Logout</strong></a>
+      </form>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+                <span class="glyphicon glyphicon-user"></span> 
+                <strong class="text-primary">
+                  nagesh  
+                </strong>
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="divider"></li>
+                <li>
+                    <div class="navbar-login navbar-login-session">
+                      <div class="row text-center">                        
+                      <div class="col-md-12">                               
+                        <a href="/users/view/12347" class="btn-link btn-primary ">Profile</a>
+                        <a class="nav-item"><hr class="border-top"></a>
+                        <a href="/users/chpwd/12347" class="btn-link btn-info">Change Password</a>                               
+                      </div>                            
+                    </div>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>    
+   
+    </div>
+  </nav>
+  
+ <div class="overflow-auto">
+
+    
+<h4>User Devices List </h4>
+
+
+    <div class="container">
+        <form action="/userdev/add" class="form-inline" method="post" style="width:100%">  
+          <div class="row">
+            
+              <label for="userid" >User</label>          
+           <select class="form-control" id="userid" name="userid" >            
+            
+            <option value="12347">nagesh(nagesh,ADMIN) </option>
+            
+            <option value="12358">Guest(Guest,GUEST) </option>
+            
+           </select>  
+            <label for="deviceid" >Device</label>       
+         <select class="form-control" id="deviceid" name="deviceid" > 
+            
+                <option value="13">device name 3(NODE,tech name) </option>
+                
+         </select>       
+         <button type="submit" class="btn btn-primary">Add</button>
+          </div>         
+      </form>
+   </div>
+     
+    
+            <table class="table table-striped table-hover table-sm table-bordered table-responsive text-nowrap small">
+      <thead class="thead-dark">
+    <tr class="small">
+        
+            <th>USER.USERNAME </th>
+           
+            <th>USER.USERTYPE </th>
+           
+            <th>USER.USERCATEGORY </th>
+           
+            <th>DEVICEDETAIL.DEVICENAME </th>
+           
+            <th>DEVICEDETAIL.DEVICETYPE </th>
+           
+            <th>DEVICEDETAIL.DEVICEMODE </th>
+           
+            <th>DEVICEDETAIL.TECH_NAME </th>
+           
+           <th> 
+           
+          </th>
+      </tr>
+      </thead>
+      
+        <tr>
+       
+        <td>nagesh </td>
+       
+        <td>ADMIN </td>
+       
+        <td>Default </td>
+       
+        <td> </td>
+       
+        <td>Router </td>
+       
+        <td>Modem </td>
+       
+        <td>Huawei Router </td>
+             
+    </tr>
+      
+        <tr>
+       
+        <td>nagesh </td>
+       
+        <td>ADMIN </td>
+       
+        <td>Default </td>
+       
+        <td> </td>
+       
+        <td>Gateway </td>
+       
+        <td>gateway </td>
+       
+        <td>Raspbery pi </td>
+             
+    </tr>
+      
+        <tr>
+       
+        <td>nagesh </td>
+       
+        <td>ADMIN </td>
+       
+        <td>Default </td>
+       
+        <td> </td>
+       
+        <td>Controler </td>
+       
+        <td>node </td>
+       
+        <td>NodeMcu </td>
+             
+    </tr>
+      
+        <tr>
+       
+        <td>nagesh </td>
+       
+        <td>ADMIN </td>
+       
+        <td>Default </td>
+       
+        <td>device name 3 </td>
+       
+        <td>adf </td>
+       
+        <td>NODE </td>
+       
+        <td>tech name </td>
+             
+    </tr>
+      
+        <tr>
+       
+        <td>Guest </td>
+       
+        <td>GUEST </td>
+       
+        <td>Default </td>
+       
+        <td>device name 3 </td>
+       
+        <td>adf </td>
+       
+        <td>NODE </td>
+       
+        <td>tech name </td>
+             
+    </tr>
+             
+    </table>
+    
+      
+
+   
+<div id="Validations">
+    
+        <p class="text-center text-danger text-bold"></p>
+    
+</div>
+    
+<footer class="fixed-bottom">
+ <div>
+   <p class="text-center text-muted">© Copyright 2020 IotLawn</p>
+ </div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="./js/bootstrap.min.js" ></script>
+
+
+ </div>
+</body>
+</html> 
+</div>  
+

@@ -1,0 +1,121 @@
+
+    <header class="header">
+	<picture>
+  <source media="(min-width:650px)" srcset="http://mobidock.in/mobidocklogo.jpg">
+  <source media="(min-width:465px)" srcset="http://mobidock.in/mobidocklogo.jpg">
+  <img src="http://mobidock.in/mobidocklogo.jpg" alt="mobidock" style="width:auto;">
+</picture>
+
+
+        <h1>📊 IoT Cloud Weather Monitoring System</h1>
+        <form method="get">
+            <input type="number" name="readingsCount" min="1" placeholder="Number of readings (<%= pageData.latest.count %>)">
+            <input type="submit" value="UPDATE">
+        </form>
+    </header>
+<body>
+    <p>Last reading: <%= pageData.latest.time %></p>
+    <section class="content">
+	    <div class="box gauge--1">
+	    <h3>TEMPERATURE</h3>
+              <div class="mask">
+			  <div class="semi-circle"></div>
+			  <div class="semi-circle--mask"></div>
+			</div>
+		    <p style="font-size: 30px;" id="temp">--</p>
+		    <table cellspacing="5" cellpadding="5">
+		        <tr>
+		            <th colspan="3">Temperature <%= pageData.latest.count %>readings</th>
+	            </tr>
+		        <tr>
+		            <td>Min</td>
+                    <td>Max</td>
+                    <td>Average</td>
+                </tr>
+                <tr>
+                    <td><%= pageData.temp.min %>&deg;C</td>
+                    <td><%= pageData.temp.max %>&deg;C</td>
+                    <td><%= pageData.temp.avg  %>&deg;C</td>
+                </tr>
+            </table>
+        </div>
+        <div class="box gauge--2">
+            <h3>HUMIDITY</h3>
+            <div class="mask">
+                <div class="semi-circle"></div>
+                <div class="semi-circle--mask"></div>
+            </div>
+            <p style="font-size: 30px;" id="humi">--</p>
+            <table cellspacing="5" cellpadding="5">
+                <tr>
+                    <th colspan="3">Humidity <%= pageData.latest.count  %>readings</th>
+                </tr>
+                <tr>
+                    <td>Min</td>
+                    <td>Max</td>
+                    <td>Average</td>
+                </tr>
+                <tr>
+                    <td><%= pageData.humid.min %>&deg;C</td>
+                    <td><%= pageData.humid.max %>&deg;C</td>
+                    <td><%= pageData.humid.avg  %>&deg;C</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+     <h2> View Latest  <%=pageData.latest.count %>  Readings</h2>
+     <% if (typeof result[0]!=='undefined') { %>
+        <%- include('./partials/llistdata.ejs')%>
+    <%} else {%>
+        <div>
+            <p> No Records found...!  </p>
+        </div>
+     <%}%> 
+
+
+<script>
+    var value1 ='<%= pageData.latest.temp  %>';
+    var value2 = '<%= pageData.latest.humid %>';
+    setTemperature(value1);
+    setHumidity(value2);
+
+    function setTemperature(curVal){
+    	//set range for Temperature in Celsius -5 Celsius to 38 Celsius
+    	var minTemp = -5.0;
+    	var maxTemp = 38.0;
+        //set range for Temperature in Fahrenheit 23 Fahrenheit to 100 Fahrenheit
+    	//var minTemp = 23;
+    	//var maxTemp = 100;
+
+    	var newVal = scaleValue(curVal, [minTemp, maxTemp], [0, 180]);
+    	$('.gauge--1 .semi-circle--mask').attr({
+    		style: '-webkit-transform: rotate(' + newVal + 'deg);' +
+    		'-moz-transform: rotate(' + newVal + 'deg);' +
+    		'transform: rotate(' + newVal + 'deg);'
+    	});
+    	$("#temp").text(curVal + ' ºC');
+    }
+
+    function setHumidity(curVal){
+    	//set range for Humidity percentage 0 % to 100 %
+    	var minHumi = 0;
+    	var maxHumi = 100;
+
+    	var newVal = scaleValue(curVal, [minHumi, maxHumi], [0, 180]);
+    	$('.gauge--2 .semi-circle--mask').attr({
+    		style: '-webkit-transform: rotate(' + newVal + 'deg);' +
+    		'-moz-transform: rotate(' + newVal + 'deg);' +
+    		'transform: rotate(' + newVal + 'deg);'
+    	});
+    	$("#humi").text(curVal + ' %');
+    }
+
+    function scaleValue(value, from, to) {
+        var scale = (to[1] - to[0]) / (from[1] - from[0]);
+        var capped = Math.min(from[1], Math.max(from[0], value)) - from[0];
+        return ~~(capped * scale + to[0]);
+    }
+</script>
+</body>
+

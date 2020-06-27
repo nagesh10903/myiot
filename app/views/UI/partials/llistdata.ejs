@@ -5,10 +5,7 @@
            if(k.toUpperCase()!=='ROWID' ){
           %>
             <th><%= k.toUpperCase() %> </th>
-           <%  }}; %>
-           <th> 
-           
-          </th>
+           <%  }}; %>          
       </tr>
       </thead>
       <% result.forEach( row =>{   %>
@@ -17,11 +14,7 @@
           if(k.toUpperCase()!=='ROWID' ){  %>
         <td><%= row[k] %> </td>
        <%  }}; %>
-       <td class="small">
-  
-           <a href="/<%=baseurl%>/view/<%=row['rowid']%>" class="btn btn-info btn-xs ">View</a>
-        
-          </td>
+      
     </tr>
       <%  }) %>   
     
