@@ -27,18 +27,23 @@ class datalogctl extends basecontroler{
  } 
 
  addDeviceData(req,res){
-    datalogService.addDeviceData(req.body,(err,result) => {
+     var data=req.body;
+     data.userid=req.user.rowid;
+    datalogService.addDeviceData(data,(err,result) => {
         sendResponse(err,result,res);       
     });
  } 
  addSensorData(req,res){
-    datalogService.addSensorData(req.body,(err,result) => {
+    var data=req.body;
+    data.userid=req.user.rowid;
+    datalogService.addSensorData(data,(err,result) => {
         sendResponse(err,result,res);       
     });
  } 
 
  FilterDeviceData(req,res){
-    datalogService.FilterDeviceData((err,result) => {
+    var byuser={userid:req.user.rowid,device_type:'DEVICVE'};
+    datalogService.FilterDeviceData(byuser,(err,result) => {
         sendResponse(err,result,res);
     });
  }
@@ -48,5 +53,36 @@ class datalogctl extends basecontroler{
         sendResponse(err,result,res);
     });
  }
+
+ getDeviceLabel(req,res){
+     var bydevice={userid:req.user.rowid,deviceid:req.params.id,device_type:'DEVICE',mode_control:'LABEL'};
+    datalogService.getDeviceLabel(bydevice,(err,result) => {
+        sendResponse(err,result,res);
+    });
+ }
+
+ getUserLabel(req,res){
+    var byuser={userid:req.user.rowid,device_type:'USER',mode_control:'LABEL'};
+   datalogService.getUserLabel(byuser,(err,result) => {
+       sendResponse(err,result,res);
+   });
+}
+
+addDeviceLabel(req,res){
+    var data=req.body;
+    data.userid=req.user.rowid;
+    datalogService.addDeviceLabel(data,(err,result) => {
+        sendResponse(err,result,res);       
+    });
+ } 
+
+ addUserLabel(req,res){
+    var data=req.body;
+    data.userid=req.user.rowid;
+    datalogService.addUserLabel(data,(err,result) => {
+        sendResponse(err,result,res);       
+    });
+ } 
+
 }
 module.exports=new datalogctl(datalogService);

@@ -14,8 +14,9 @@ var params = {
 };
 
 module.exports = function() {
-    var jwtstrategy = new Strategy(params, function(payload, done) {
-        userService.getById(payload.id,(err,user)=>{
+     var jwtstrategy = new Strategy(params, function(payload, done) {
+        console.log(payload);
+        userService.getById(payload.rowid,(err,user)=>{
             if (user) {
                 return done(null, {
                   rowid:user.rowid,usertype:user.usertype

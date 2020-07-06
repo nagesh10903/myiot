@@ -96,6 +96,10 @@ module.exports = function(sequelize, DataTypes) {
       value_j: {
         type: DataTypes.DECIMAL,
         allowNull: true
+      },
+      label: {
+        type: DataTypes.STRING(50),
+        allowNull: true
       }
     }, {
       tableName: 'datalog'

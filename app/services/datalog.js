@@ -35,7 +35,7 @@ class datalog extends baseservice
   }
 
   FilterSensorData(byuser,limit,callback){
-    this.model.findAll({where:byuser,attributes:[['rowid','Id'],'name',['label','Location'],'device_type','mode_control',['value_i','Temp'],['value_j','Humidity'],'timestamp']            
+    this.model.findAll({where:byuser,attributes:[['rowid','Id'],'created_dt','name',['label','Location'],'device_type','mode_control',['value_i','Temp'],['value_j','Humidity'],'timestamp']            
             ,raw:true,limit:limit,order:['timestamp']})
     .then((tbl,error)=>{
       this.errcheck(tbl,error,callback);              
@@ -44,7 +44,7 @@ class datalog extends baseservice
 
   FilterDeviceData(byuser,callback){
     this.model.findAll({where:byuser,attributes:
-            {exclude:['created_dt','updated_dt','updated_by','created_by','version','adminid','status','password','referenceid','controler']}
+            {exclude:['updated_dt','updated_by','created_by','version','adminid','status','password','referenceid','controler']}
             ,raw:true})
     .then((tbl,error)=>{
       this.errcheck(tbl,error,callback);              
@@ -65,6 +65,41 @@ class datalog extends baseservice
     .then((tbl,error)=>{
       this.errcheck(tbl,error,callback);   
     });  
+  }
+
+  addDeviceLabel(data,callback)
+  {
+    data.device_type='DEVICE';
+    data.mode_control='LABEL';
+    this.model.create(data)
+    .then((tbl,error)=>{
+      this.errcheck(tbl,error,callback);   
+    });  
+  }
+  addUserLabel(data,callback)
+  {
+    data.device_type='USER';
+    data.mode_control='LABEL';
+    this.model.create(data)
+    .then((tbl,error)=>{
+      this.errcheck(tbl,error,callback);   
+    });  
+  }
+
+  getDeviceLabel(bydevice,callback){
+    this.model.findAll({where:bydevice,attributes:[['rowid','Id'],'userid','created_dt','name',['label','Message'],'device_type','mode_control',['value_a','Message2'],['value_b','Message3']]            
+    ,raw:true,limit:limit,order:['created_dt']})
+   .then((tbl,error)=>{
+   this.errcheck(tbl,error,callback);              
+   });
+  }
+  
+  getUserLabel(byuser,callback){
+    this.model.findAll({where:byuser,attributes:[['rowid','Id'],'userid','created_dt','name',['label','Message'],'device_type','mode_control',['value_a','Message2'],['value_b','Message3']]            
+    ,raw:true,limit:limit,order:['created_dt']})
+   .then((tbl,error)=>{
+   this.errcheck(tbl,error,callback);              
+   });
   }
 
 }
