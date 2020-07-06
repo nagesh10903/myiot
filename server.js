@@ -5,10 +5,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors= require("cors");    
 const passport=require("passport")
+const apiauth = require("./app/middleware/apiAurth")();
 const flash=require("express-flash")
 const http=require("http");
 const path=require("path")
 const initializePassport=require('./app/middleware/passport-config').initialize
+const {getApiToken}= require('./app/middleware/passport-config')
 
 const app = express();
 const corsOptions={origin:"http://localhost:8081"};
@@ -31,6 +33,7 @@ app.use(express.json());
 require("./app/middleware/sessionstate")(app)
 app.use(flash())
 app.use(passport.initialize())
+app.use(apiauth.initialize());
 app.use(passport.session())
 
 // parse requests of content-type: application/x-www-form-urlencoded
@@ -50,6 +53,8 @@ app.post('/login',passport.authenticate('local',{
   failureRedirect:'/login',
   failureFlash:"Invalid Email/Password !"
 }))
+
+app.post('/token',getApiToken)
 
 // set port, listen for requests
 const PORT=process.env.APP_PORT||8080;

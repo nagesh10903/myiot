@@ -14,6 +14,14 @@ class user extends baseservice
         this.errcheck(tbl,error,callback); 
      })
   }
+
+  getuserByUsername(username,callback){
+    this.model.findOne({where:{username:username}})
+    .then((tbl,error)=>{
+     this.errcheck(tbl,error,callback); 
+  })
+     }
+
   getuserByEmail(email,callback){
    this.model.findOne({where:{email:email}})
    .then((tbl,error)=>{

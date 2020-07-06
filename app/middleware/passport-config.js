@@ -1,6 +1,8 @@
 const LocalStrategy =require("passport-local").Strategy;
 const bcrypt=require("bcrypt");
 const userService=require("../services/user");
+var jwt = require("jwt-simple");
+
 function initialize(passport)
 { 
   const authenticateUser= async (email,password,done)=>{
@@ -49,5 +51,25 @@ function initialize(passport)
      }
      next()
     }
-module.exports={initialize,checkAurth,checkNotAurth}
 
+    // Generate api Token
+    const getApiToken= async (req, res)=> {
+      if (req.body.username && req.body.password) {
+        var username = req.body.username;
+        var password = req.body.password
+        userService.getuserByUsername(username,(err,user)=>{
+         if(user===null || user==0 || err){
+             return res.sendStatus(401);
+           } 
+         if(bcrypt.compareSync(password,user.password)===true || password===user.password ){
+            var payload={rowid:user.rowid,usertype:user.usertype};         
+            return res.json({username:user.username,token: jwt.encode(payload, process.env.SESSION_SECRET)})
+          }          
+         else return res.sendStatus(401);        
+         })  
+      }              
+    }
+    
+
+
+module.exports={initialize,checkAurth,checkNotAurth,getApiToken}

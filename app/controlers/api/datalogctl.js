@@ -49,4 +49,4 @@ class datalogctl extends basecontroler{
     });
  }
 }
-module.exports=new datalogctl(datalogervice);
+module.exports=new datalogctl(datalogService);
