@@ -101,7 +101,5 @@ class datalog extends baseservice
    this.errcheck(tbl,error,callback);              
    });
   }
-
 }
-
 module.exports=new datalog(dbmodels.datalog);

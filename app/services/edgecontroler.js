@@ -16,7 +16,7 @@ class edgecontroler extends baseservice
 
       this.model.findOne({where:byoptions,raw:true,
         attributes:{exclude:['created_dt','updated_dt','updated_by','created_by','version','status']},           
-            include:[{model:dbmodels.devicedetails,
+            include:[{model:dbmodels.devicedetails,as:'e',
             attributes:['rowid','devicename','devicetype','tech_name','tech_model','devicemode']
             }]        
           })
